@@ -1,0 +1,17 @@
+    Program.cs:
+        Entry point of the application.
+        Handles initialization and setup.
+        Contains the main loop for user interaction.
+
+    PasswordManager.cs:
+        Core logic for managing passwords.
+        Includes methods for adding, retrieving, updating, and deleting passwords.
+        Interacts directly with the EncryptionHelper and PasswordStorage.
+
+    EncryptionHelper.cs:
+        Handles encryption and decryption of passwords.
+        Provides methods for encrypting and decrypting passwords.
+
+    PasswordStorage.cs:
+        Manages the storage of password entries.
+        May use a simple file-based storage mechanism for simplicity.
