@@ -1,2 +1,4 @@
 ﻿
-Console.WriteLine("Welcome to the password manager. Please select an option ");
+using PasswordManager;
+
+UserInterface.MainMenu();
