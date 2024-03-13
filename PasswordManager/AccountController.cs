@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid password. Please use a different password.", nameof(newPassword));
+                    throw new ArgumentException("Invalid password. Please use a different one.", nameof(newPassword));
                 }
             }
             else
