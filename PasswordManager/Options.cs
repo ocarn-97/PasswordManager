@@ -9,6 +9,15 @@ namespace PasswordManager
 {
     internal class Options
     {
+        [Option("title", HelpText = "Title/Account Name.")]
+        public string? Title { get; set; }
+
+        [Option("username", HelpText = "Username.")]
+        public string? Username { get; set; }
+
+        [Option("password", HelpText = "Password.")]
+        public string? Password { get; set; }
+
         [Option('a', "add", HelpText = "Add an account.")]
         public bool AddAccount { get; set; }
 
@@ -26,5 +35,8 @@ namespace PasswordManager
 
         [Option('h', "help", HelpText = "Display help screen.")]
         public bool Help { get; set; }
+
+        [Option('g', "generate", HelpText = "Generate a secure password.")]
+        public bool GeneratePassword { get; set; }
     }
 }

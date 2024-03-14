@@ -12,11 +12,13 @@ Console.WriteLine(@"
                                                                          __/ |          
                                                                         |___/        ");
 Console.WriteLine("Welcome to the Password Manager! This console application allows you to save passwords for your most sacred of accounts.");
-Console.WriteLine("Enter '-h' or 'help' to see the menu options.");
+Console.WriteLine("Enter '-h' or '--help' to see the menu options.");
 Console.WriteLine("\nPlease enter your command:");
 
 while (true)
 {
+    AccountController accountController = new();
+
     string input = Console.ReadLine() ?? string.Empty;
 
     if (string.IsNullOrEmpty(input))
@@ -31,7 +33,7 @@ while (true)
        {
            if (options.Help)
            {
-               var parserResult = Parser.Default.ParseArguments<Options>(new string[] { });
+               var parserResult = Parser.Default.ParseArguments<Options>([]);
                var helpText = new HelpText(new HeadingInfo("Password Manager", "1.0"));
                helpText.AddOptions(parserResult);
                Console.WriteLine(helpText);
@@ -41,28 +43,51 @@ while (true)
            if (options.Exit)
            {
                Console.WriteLine("Exiting Password Manager...");
-               System.Threading.Thread.Sleep(1000);
                Environment.Exit(0);
            }
 
            if (options.AddAccount)
            {
-               Console.WriteLine("Adding account...");
+               if (string.IsNullOrEmpty(options.Title) || string.IsNullOrEmpty(options.Username) || string.IsNullOrEmpty(options.Password))
+               {
+                   Console.WriteLine("Title, username, and password are required for adding an account.");
+                   return;
+               }
+
+               accountController.AddAccount(options.Title, options.Username, options.Password);
+               Console.WriteLine("Account added successfully.");
            }
 
            if (options.DeleteAccount)
            {
-               Console.WriteLine("Deleting account...");
+               if (string.IsNullOrEmpty(options.Title))
+               {
+                   Console.WriteLine("Title is required for deleting an account.");
+                   return;
+               }
+               accountController.DeleteAccount(options.Title);
+               Console.WriteLine("Account deleted");
            }
 
            if (options.RetrieveAccounts)
            {
-               Console.WriteLine("Retrieving all accounts...");
+               accountController.RetrieveAccounts();
            }
 
            if (options.UpdateAccount)
            {
+               if (string.IsNullOrEmpty(options.Title) || string.IsNullOrEmpty(options.Username) || string.IsNullOrEmpty(options.Password))
+               {
+                   Console.WriteLine("Title, username, and password are required for adding an account.");
+                   return;
+               }
                Console.WriteLine("Updating account...");
+           }
+
+           if (options.GeneratePassword)
+           {
+               string GeneratedPassword = PasswordGenerator.GeneratePassword();
+               Console.WriteLine($"Generated Password: {GeneratedPassword}");
            }
        })
        .WithNotParsed(errors =>

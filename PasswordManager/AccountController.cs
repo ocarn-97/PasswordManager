@@ -3,7 +3,11 @@
     internal class AccountController
     {
         // List of account objects
-        private List<Account> accounts = [];
+#pragma warning disable IDE0044 // Add readonly modifier
+#pragma warning disable IDE0028 // Simplify collection initialization
+        private List<Account> accounts = new();
+#pragma warning restore IDE0028 // Simplify collection initialization
+#pragma warning restore IDE0044 // Add readonly modifier
 
         // Add account
         public void AddAccount(string title, string username, string password)
@@ -12,26 +16,43 @@
         }
 
         // Delete account
-        public void DeleteAccount(Account account)
+        public void DeleteAccount(string accountName)
         {
-            accounts.Remove(account);
+            if (accounts == null || accounts.Count == 0)
+            {
+                Console.WriteLine("No account exist");
+                throw new InvalidOperationException("No accounts exist to be deleted.");
+            }
+
+            Account accountToDelete = accounts.FirstOrDefault(account => account.Title.Equals(accountName, StringComparison.OrdinalIgnoreCase)) ?? throw new ArgumentException("Account not found.");
+            accounts.Remove(accountToDelete);
         }
 
         // Retrieve accounts
         public void RetrieveAccounts()
         {
-            foreach (var account in accounts)
+            if (accounts == null || accounts.Count == 0)
             {
-                Console.WriteLine($"Title: {account.Title}, Username: {account.Username}, Password: {account.Password}");
+                Console.WriteLine("No account exist");
+                throw new InvalidOperationException("No accounts exist to be deleted.");
+            }
+            else
+            {
+                Console.WriteLine("\nAccounts:");
+                foreach (var account in accounts)
+                {
+                    Console.WriteLine($"Title: {account.Title}, Username: {account.Username}, Password: {account.Password}");
+                }
             }
         }
 
         // Update account
-        public void UpdateAccount(string accountName, string newTitle, string newUsername, string newPassword)
+        public void UpdateAccount(string accountName, string newUsername, string newPassword)
         {
-            if (accounts == null)
+            if (accounts == null || accounts.Count == 0)
             {
-                throw new ArgumentNullException(accountName, "No accounts with this name exist.");
+                Console.WriteLine("No accounts exist");
+                throw new ArgumentNullException(nameof(accountName), "No accounts exist.");
             }
 
             Account? accountToUpdate = accounts.FirstOrDefault(account => account.Title.Equals(accountName, StringComparison.OrdinalIgnoreCase));
@@ -42,7 +63,6 @@
 
                 if (isValidPassword)
                 {
-                    accountToUpdate.Title = newTitle;
                     accountToUpdate.Username = newUsername;
                     accountToUpdate.Password = newPassword;
                 }
