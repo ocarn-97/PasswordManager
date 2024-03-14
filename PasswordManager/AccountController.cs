@@ -2,6 +2,10 @@
 {
     internal class AccountController
     {
+#pragma warning disable IDE0044 // Add readonly modifier
+        private StorageController storageController = new();
+#pragma warning restore IDE0044 // Add readonly modifier
+
         // List of account objects
 #pragma warning disable IDE0044 // Add readonly modifier
 #pragma warning disable IDE0028 // Simplify collection initialization
@@ -13,6 +17,7 @@
         public void AddAccount(string title, string username, string password)
         {
             accounts.Add(new Account(title, username, password));
+            storageController.AddToFile(title, username, password);
         }
 
         // Delete account
@@ -21,11 +26,12 @@
             if (accounts == null || accounts.Count == 0)
             {
                 Console.WriteLine("No account exist");
-                throw new InvalidOperationException("No accounts exist to be deleted.");
+                throw new InvalidOperationException("No accounts exist.");
             }
 
             Account accountToDelete = accounts.FirstOrDefault(account => account.Title.Equals(accountName, StringComparison.OrdinalIgnoreCase)) ?? throw new ArgumentException("Account not found.");
             accounts.Remove(accountToDelete);
+            storageController.DeleteFromFile(accountToDelete);
         }
 
         // Retrieve accounts
