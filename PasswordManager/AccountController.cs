@@ -8,9 +8,7 @@
 
         // List of account objects
 #pragma warning disable IDE0044 // Add readonly modifier
-#pragma warning disable IDE0028 // Simplify collection initialization
-        public List<Account> accounts = new();
-#pragma warning restore IDE0028 // Simplify collection initialization
+        private List<Account> accounts = [];
 #pragma warning restore IDE0044 // Add readonly modifier
 
         // Add account
@@ -37,20 +35,20 @@
         // Retrieve accounts
         public void RetrieveAccounts()
         {
-            //if (accounts == null || accounts.Count == 0)
-            //{
-            //    Console.WriteLine("No accounts exist");
-            //    throw new InvalidOperationException("No accounts exist.");
-            //}
-            //else
-            //{
+            if (accounts == null || accounts.Count == 0)
+            {
+                Console.WriteLine("No accounts exist");
+                throw new InvalidOperationException("No accounts exist.");
+            }
+            else
+            {
                 Console.WriteLine("\nAccounts:");
                 foreach (var Account in accounts)
                 {
                     Console.WriteLine($"Title: {Account.Title}, Username: {Account.Username}, Password: {Account.Password}");
                 }
-            //}
         }
+    }
 
         // Update account
         public void UpdateAccount(string accountName, string newUsername, string newPassword)
