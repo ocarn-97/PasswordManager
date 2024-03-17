@@ -1,6 +1,6 @@
 ****Password Manager****
 
-Password Manager is a simple console-based application written in C# that allows users to manage their passwords. It provides basic functionalities such as adding, deleting, updating, and retrieving account information as well as generating and checking passwords.
+Password Manager is a simple console-based application written in C# that allows users to manage their passwords. It provides basic functionalities such as adding, deleting, updating, and retrieving account information as well as generating and checking passwords. This program is insecure and not meant for production-use. 
 
 
 ****Features****
