@@ -4,18 +4,20 @@
     {
         private static readonly string filePath = "C:\\C#\\PasswordManager\\BadPasswordList.txt";
 
-        public static bool CheckPassword(string password)
+        public static void CheckPassword(string password)
         {
             if (IsTooShort(password))
             {
+                Console.WriteLine($"The password {password} is too short. Please use a password that is at least 12 characters in length.");
                 throw new Exception($"The password {password} is too short. Please use a password that is at least 12 characters in length.");
             }
             else if (IsBadPassword(password))
             {
+                Console.WriteLine($"The password {password} is too predictable. Please use a different password.");
                 throw new Exception($"The password {password} is too predictable. Please use a different password.");
             }
 
-            return true;
+            Console.WriteLine("This password appears to follow best practices for security.");
         }
 
 

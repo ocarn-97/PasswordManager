@@ -38,5 +38,8 @@ namespace PasswordManager
 
         [Option('g', "generate", HelpText = "Generate a secure password.")]
         public bool GeneratePassword { get; set; }
+
+        [Option('c', "check", HelpText = "Check whether your password is secure.")]
+        public bool CheckPassword { get; set; }
     }
 }

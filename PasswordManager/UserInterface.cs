@@ -66,7 +66,6 @@ namespace PasswordManager
                            }
 
                            accountController.AddAccount(options.Title, options.Username, options.Password);
-                           Console.WriteLine("Account added successfully.");
                        }
 
                        if (options.DeleteAccount)
@@ -76,29 +75,38 @@ namespace PasswordManager
                                Console.WriteLine("Title is required for deleting an account.");
                                return;
                            }
-                           accountController.DeleteAccount(options.Title);
-                           Console.WriteLine("Account deleted");
+                           AccountController.DeleteAccount(options.Title);
                        }
 
                        if (options.RetrieveAccounts)
                        {
-                           accountController.RetrieveAccounts();
+                           AccountController.RetrieveAccounts();
                        }
 
                        if (options.UpdateAccount)
                        {
                            if (string.IsNullOrEmpty(options.Title) || string.IsNullOrEmpty(options.Username) || string.IsNullOrEmpty(options.Password))
                            {
-                               Console.WriteLine("Title, username, and password are required for adding an account.");
+                               Console.WriteLine("The title of the target account as well as the new username and password are required to update it.");
                                return;
                            }
-                           Console.WriteLine("Updating account...");
+                           AccountController.UpdateAccount(options.Title, options.Username, options.Password);
                        }
 
                        if (options.GeneratePassword)
                        {
                            string GeneratedPassword = PasswordGenerator.GeneratePassword();
                            Console.WriteLine($"Generated Password: {GeneratedPassword}");
+                       }
+
+                       if (options.CheckPassword)
+                       {
+                           if (string.IsNullOrEmpty(options.Password))
+                           {
+                               Console.WriteLine("Please include a password to check.");
+                               return;
+                           }
+                           PasswordChecker.CheckPassword(options.Password);
                        }
                    })
                    .WithNotParsed(errors =>

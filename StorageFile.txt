@@ -1,10 +1,3 @@
-Title: outlook, Username: carneyof, Password: 123
-Title: gmail, Username: carneyof, Password: 123
+Title: gmail, Username: owenc, Password: 135
 Title: facebook, Username: carneyof, Password: 123
-Title: outlook, Username: carneyof, Password: 123
 Title: gmail, Username: carneyof, Password: 123
-Title: outlook.com, Username: carneyof, Password: owen123
-Title: outlook, Username: owen, Password: carney
-Title: outlook, Username: owen, Password: carney
-Title: outlook, Username: owen, Password: carney
-Title: outlook, Username: owen, Password: carney
