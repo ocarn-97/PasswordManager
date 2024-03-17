@@ -9,6 +9,8 @@ Password Manager is a simple console-based application written in C# that allows
     - Delete Account: Delete an existing account based on its title.
     - Update Account: Update the username or password of an existing account.
     - Retrieve Accounts: Retrieve and display all existing accounts.
+    - Generate Password: Generate a secure password.
+    - Check Password: Check whether a password is secure.
 
 
 ****Getting Started****
